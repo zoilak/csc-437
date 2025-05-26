@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TrackBoxd - Dashboard</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <ul class="navbar">
+    <li><a href="index.html">TrackBoxd</a></li>
+    <li><a href="user.html">User</a></li>
+    <li><a href="albums.html">Albums</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="settings.html">Settings</a></li>
+    <li><a href="signup.html">Sign Up</a></li>
+    <li>
+      <label>
+        <input type="checkbox" autocomplete="off" />
+        Dark mode
+      </label>
+    </li>
+  </ul>
+
+  <h1 align="center">Welcome to TrackBoxd
+    <svg class="icon">
+      <use href="/icons/icons.svg#album-cover" />
+    </svg>
+  </h1>
+
+  <p align="center">Discover & rate your favorite albums, Join Communities and vibe!</p>
+
+  <h2>Current Top Albums
+    <svg class="icon">
+      <use href="/icons/icons.svg#top-icon" />
+    </svg>
+  </h2>
+
+  <div class="album_row_scroll">
+    <a href="album.html?album=Thriller">
+      <img src="album covers/Thriller.jpg" alt="Thriller" width="300" height="300">
+    </a>
+
+    <a href="album.html?album=Sweetner">
+      <img src="album covers/Sweetner.png" alt="Sweetner" width="300" height="300">
+    </a>
+
+    <a href="album.html?album=Sour">
+      <img src="album covers/Sour.jpeg" alt="Sour" width="300" height="300">
+    </a>
+
+    <a href="album.html?album=FatherOfTheBride">
+      <img src="album covers/FatherOfTheBride.png" alt="Father of the Bride" width="300" height="300">
+    </a>
+
+    <!-- Repeat as needed -->
+    <a href="album.html?album=Thriller">
+      <img src="album covers/Thriller.jpg" alt="Thriller" width="300" height="300">
+    </a>
+
+    <a href="album.html?album=Sweetner">
+      <img src="album covers/Sweetner.png" alt="Sweetner" width="300" height="300">
+    </a>
+
+    <a href="album.html?album=Sour">
+      <img src="album covers/Sour.jpeg" alt="Sour" width="300" height="300">
+    </a>
+
+    <a href="album.html?album=FatherOfTheBride">
+      <img src="album covers/FatherOfTheBride.png" alt="Father of the Bride" width="300" height="300">
+    </a>
+  </div>
+
+  <script>
+    const darkModeToggle = document.querySelector('input[type="checkbox"]');
+
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      document.body.classList.add('dark-mode');
+      darkModeToggle.checked = true;
+    }
+
+    darkModeToggle.addEventListener('change', function () {
+      if (this.checked) {
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('darkMode', 'disabled');
+      }
+    });
+  </script>
+
+  <script type="module">
+    import { define } from "@calpoly/mustang";
+    import { TrackboxdReviewElement } from "/src/trackboxd-review.js";
+
+    define({
+      "trackboxd-review": TrackboxdReviewElement
+    });
+  </script>
+
+</body>
+</html>

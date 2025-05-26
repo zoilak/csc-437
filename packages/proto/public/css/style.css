@@ -1,81 +1,83 @@
-  
-  
-  
-  body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: var(--color-background-page);
-  }
-  
-  h2 {
-    color: var(--color-text);
-    font-family: Bungee Shade;
-  }
-  h1 {
-    color: #c62d2d;
-    font-family: "Bungee Shade";
-    text-align: center;
-  }
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: var(--color-background-page);
+  color: var(--color-text); 
+}
 
-  p {
-    color: var(--color-text);
-    font-family: "Noticia Text";
-    text-align: center;
-    
-  }
+h1 {
+  color: var(--color-heading-main);
+  font-family: "Bungee Shade";
+  text-align: center;
+}
 
-  .header{
-    padding: 3px;
-    text-align: center;
-    background: #1abc9c;
-    color: white;
-    font-size: 13px;
-  }
+h2 {
+  color: var(--color-text);
+  font-family: Bungee Shade;
+}
 
-  .navbar  {
-    display: flex;
-    justify-content: space-between;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    background-color: #333;
-  }
-  
-  .navbar li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
-    
-  }
+h3 {
+  color: var(--color-text);
+  font-family: Bungee Shade;
+}
 
-  .navbar li a:hover {
-    background-color: #111;
-  }
-  
-  .album_column {
-    flex: 25%;
-    padding: 5px;
-  }
+p {
+  color: var(--color-text);
+  font-family: "Noticia Text";
+  text-align: center;
+}
 
-  div.album_row_scroll{
-    background-color: #333;
-    overflow: auto;
-    white-space: nowrap;
-    padding: 10px;
-  }
+.header {
+  padding: 3px;
+  text-align: center;
+  background-color: var(--color-accent);
+  color: var(--color-text-control-inverted);
+  font-size: 13px;
+}
 
-  div.album_row_scroll img {
-    padding: 10px;
-  }
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: var(--color-background-card);
+}
 
-  svg.icon {
-    display: inline;
-    height: 2em;
-    width: 2em;
-    vertical-align: top;
-    fill: currentColor;
-  }
-  
+.navbar li a {
+  display: block;
+  color: var(--color-text);
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+.navbar li a:hover {
+  background-color: var(--color-accent);
+  color: var(--color-text-control-inverted);
+}
+
+.album_column {
+  flex: 25%;
+  padding: 5px;
+}
+
+div.album_row_scroll {
+  background-color: var(--color-background-card);
+  overflow: auto;
+  white-space: nowrap;
+  padding: 10px;
+}
+
+div.album_row_scroll img {
+  padding: 10px;
+}
+
+svg.icon {
+  display: inline;
+  height: 2em;
+  width: 2em;
+  vertical-align: top;
+  fill: currentColor;
+}
