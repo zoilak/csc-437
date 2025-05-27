@@ -13,10 +13,11 @@
 <body>
   <script type="module">
   import { define } from "@calpoly/mustang";
-  import { TrackboxdHeader } from "/src/header.ts";
-
+  import { TrackboxdHeader } from "/src/trackboxd-header.ts";
+  import { TrackboxdHeaderWrapper } from "/src/trackboxd-header-wrapper.ts";
   define({
-    "trackboxd-header": TrackboxdHeader
+    "trackboxd-header": TrackboxdHeader,
+    "trackboxd-header-wrapper": TrackboxdHeaderWrapper
   });
 </script>
   <!-- <h1 align="center">Welcome to TrackBoxd
@@ -24,7 +25,8 @@
       <use href="/icons/icons.svg#album-cover" />
     </svg>
   </h1> -->
-  <trackboxd-header></trackboxd-header>
+  <trackboxd-header-wrapper src="/data/header.json"></trackboxd-header-wrapper>
+
 
 
   <ul class="navbar">

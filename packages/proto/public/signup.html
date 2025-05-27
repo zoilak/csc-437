@@ -10,11 +10,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1 align="center">Welcome to TrackBoxd
+  <!-- <h1 align="center">Welcome to TrackBoxd
     <svg class="icon">
       <use href="/icons/icons.svg#album-cover" />
     </svg>
-  </h1>
+  </h1> -->
+
+   <script type="module">
+  import { define } from "@calpoly/mustang";
+  import { TrackboxdHeader } from "./src/trackboxd-header.ts";
+  import { TrackboxdHeaderWrapper } from "./src/trackboxd-header-wrapper.ts";
+  define({
+    "trackboxd-header": TrackboxdHeader,
+    "trackboxd-header-wrapper": TrackboxdHeaderWrapper
+  });
+</script>
+  <!-- <h1 align="center">Welcome to TrackBoxd
+    <svg class="icon">
+      <use href="/icons/icons.svg#album-cover" />
+    </svg>
+  </h1> -->
+  <trackboxd-header-wrapper src="/data/header.json"></trackboxd-header-wrapper>
+
+
   <ul class ="navbar">
     <li><a href="index.html">TrackBoxd</a></li>
     <li><a href="user.html">User</a></li>
@@ -45,6 +63,13 @@
 
 
   </form>
+  <script>
+    const darkModeToggle = document.querySelector('input[type="checkbox"]');
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      document.body.classList.add('dark-mode');
+      if (darkModeToggle) darkModeToggle.checked = true;
+    }
+  </script>
   
 
   <a href="index.html">← Back to Dashboard</a>

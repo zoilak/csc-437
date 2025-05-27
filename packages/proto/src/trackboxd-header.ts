@@ -1,7 +1,9 @@
 import { LitElement, html, css } from "lit";
+import reset from "./styles/reset.css.ts";
 
 export class TrackboxdHeader extends LitElement {
-  static styles = css`
+  static styles = [ reset.styles,
+    css`
     h1 {
       text-align: center;
       font-family: 'Bungee Shade', sans-serif;
@@ -15,7 +17,7 @@ export class TrackboxdHeader extends LitElement {
       vertical-align: middle;
       margin-left: 10px;
     }
-  `;
+  `];
 
   render() {
     return html`
@@ -28,3 +30,5 @@ export class TrackboxdHeader extends LitElement {
     `;
   }
 }
+
+customElements.define('trackboxd-header', TrackboxdHeader);

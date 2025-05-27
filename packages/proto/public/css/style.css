@@ -90,7 +90,7 @@ svg.icon {
   padding: 20px;
   gap: 20px;
   margin: 20px auto;
-  max-width: 330px; /* Add this to control total width */
+  max-width: 300px; /* Add this to control total width */
 }
 
 .album-info {

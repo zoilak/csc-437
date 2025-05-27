@@ -10,21 +10,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- <h1 align="center">Welcome to TrackBoxd
-    <svg class="icon">
-      <use href="/icons/icons.svg#album-cover" />
-    </svg>
-  </h1> -->
+
+  <!-- Lit components registration -->
+  <script>
+    window.litDevMode = true;
+  </script>
   <script type="module">
-  import { define } from "@calpoly/mustang";
-  import { TrackboxdHeader } from "./src/header.ts";
+    import { define } from "@calpoly/mustang";
+    import { TrackboxdHeader } from "./src/header.ts";
+    import { TrackboxdHeaderWrapper } from "./src/trackboxd-header-wrapper.ts";
 
-  define({
-    "trackboxd-header": TrackboxdHeader
-  });
-</script>
-<trackboxd-header></trackboxd-header>
+    define({
+      "trackboxd-header": TrackboxdHeader,
+      "trackboxd-header-wrapper": TrackboxdHeaderWrapper
+    });
+  </script>
 
+  <!-- Dynamic Header -->
+  <trackboxd-header-wrapper src="/data/header.json"></trackboxd-header-wrapper>
+
+  <!-- Navbar -->
   <ul class="navbar">
     <li><a href="index.html">TrackBoxd</a></li>
     <li><a href="user.html">User</a></li>
@@ -33,36 +38,53 @@
     <li><a href="signup.html">Sign Up</a></li>
   </ul>
 
-  <!-- <h1 alt="albumTitle"></h1>  -->
+  <!-- Album Info Section -->
+   <h1 id="albumTitle"></h1>
   <div class="album-container">
-  <h1 id="albumTitle"></h1>
-  <img id="albumCover" src="" alt="albumCover" width="300" height="300">
-  </div>
-  <div class="album-info">
-  <p><strong>Album:</strong> <span id="albumTitle"></span></p>
-  <p><strong>Artist:</strong> <span id="artistName"></span></p>
-  <p><strong>Total Tracks:</strong> <span id="trackCount"></span></p>
-  <p><strong>Release Date:</strong> <span id="releaseDate"></span></p>
+    
+    <img id="albumCover" src="" alt="Album Cover" width="300" height="300">
   </div>
 
+  <div class="album-info">
+    <p><strong>Album:</strong> <span id="albumTitleText"></span></p>
+    <p><strong>Artist:</strong> <span id="artistName"></span></p>
+    <p><strong>Total Tracks:</strong> <span id="trackCount"></span></p>
+    <p><strong>Release Date:</strong> <span id="releaseDate"></span></p>
+  </div>
+
+  <!-- Reviews Section -->
+  <div class="reviews-section">
+    <h2>Reviews</h2>
+    <div id="reviews"></div>
+
+    <form id="reviewForm">
+      <input type="text" id="username" placeholder="Your Name" required>
+      <textarea id="comment" placeholder="Your Comment" required></textarea>
+      <button type="submit">Submit Review</button>
+    </form>
+  </div>
+
+  <!-- JavaScript Logic -->
   <script>
     // Get album info from URL
     const params = new URLSearchParams(window.location.search);
     const albumId = params.get('id');
-    const albumTitle = params.get('title');
+    const albumTitle = params.get('album');
     const albumCover = params.get('cover');
     const artistName = params.get('artist');
     const trackCount = params.get('tracks');
     const releaseDate = params.get('release');
 
     // Display album info
-    //document.getElementById('albumTitle').textContent = albumTitle;
+    document.getElementById('albumTitle').textContent = albumTitle;
+    document.getElementById('albumTitleText').textContent = albumTitle;
     document.getElementById('albumCover').src = albumCover;
     document.getElementById('albumCover').alt = albumTitle;
     document.getElementById('artistName').textContent = artistName;
     document.getElementById('trackCount').textContent = trackCount;
     document.getElementById('releaseDate').textContent = releaseDate;
-    // Review handling (using localStorage for demo)
+
+    // Review handling (localStorage for demo)
     const reviewsDiv = document.getElementById('reviews');
     const reviewsKey = `reviews_${albumId}`;
     const reviews = JSON.parse(localStorage.getItem(reviewsKey)) || [];
@@ -91,23 +113,16 @@
       renderReviews();
     });
   </script>
+
+  <!-- Dark Mode Toggle -->
   <script>
     const darkModeToggle = document.querySelector('input[type="checkbox"]');
-
     if (localStorage.getItem('darkMode') === 'enabled') {
       document.body.classList.add('dark-mode');
-      darkModeToggle.checked = true;
+      if (darkModeToggle) darkModeToggle.checked = true;
     }
-
-    darkModeToggle.addEventListener('change', function () {
-      if (this.checked) {
-        document.body.classList.add('dark-mode');
-        localStorage.setItem('darkMode', 'enabled');
-      } else {
-        document.body.classList.remove('dark-mode');
-        localStorage.setItem('darkMode', 'disabled');
-      }
-    });
   </script>
+
 </body>
 </html>
+
