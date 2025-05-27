@@ -11,33 +11,54 @@
   <link href="https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- <h1 align="center">Welcome to TrackBoxd
+    <svg class="icon">
+      <use href="/icons/icons.svg#album-cover" />
+    </svg>
+  </h1> -->
+  <script type="module">
+  import { define } from "@calpoly/mustang";
+  import { TrackboxdHeader } from "./src/header.ts";
+
+  define({
+    "trackboxd-header": TrackboxdHeader
+  });
+</script>
+<trackboxd-header></trackboxd-header>
+
   <ul class ="navbar">
     <li><a href="index.html">TrackBoxd</a></li>
     <li><a href="user.html">User</a></li>
-    <li><a href="albums.html">Albums</a></li>
     <li><a href="community.html">Community</a></li>
     <li><a href="settings.html">Settings</a></li>
     <li><a href="signup.html">Sign Up</a></li>
   </ul>
-  <h1>Community
-    <svg class="icon">
-      <use href="/icons/icons.svg#album-cover" />
-    </svg>
-  </h1>
+  <h2 align = "center">Community
+  </h2>
   
   <p>Connect with friends, follow users, and read reviews.</p><br><br>
   <div class="container">
     <div>1</div>
     <div>2</div>
     <div>3</div>  
-    <div>4</div>
-    <div>5</div>
-    <div>6</div>  
-    <div>7</div>
-    <div>8</div>
-    <div>9</div>
-    <div>10</div><div>11</div>
-    <div>12</div>
   </div>
+  <script>
+    const darkModeToggle = document.querySelector('input[type="checkbox"]');
+
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      document.body.classList.add('dark-mode');
+      darkModeToggle.checked = true;
+    }
+
+    darkModeToggle.addEventListener('change', function () {
+      if (this.checked) {
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('darkMode', 'disabled');
+      }
+    });
+  </script>
 </body>
 </html>

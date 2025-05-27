@@ -10,20 +10,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <ul class ="navbar">
-    <li><a href="index.html">TrackBoxd</a></li>
-    <li><a href="user.html">User</a></li>
-    <li><a href="albums.html">Albums</a></li>
-    <li><a href="community.html">Community</a></li>
-    <li><a href="settings.html">Settings</a></li>
-    <li><a href="signup.html">Sign Up</a></li>
-  </ul>
-  <h1>Settings
+  <h1 align="center">Welcome to TrackBoxd
     <svg class="icon">
       <use href="/icons/icons.svg#album-cover" />
     </svg>
   </h1>
+  <ul class ="navbar">
+    <li><a href="index.html">TrackBoxd</a></li>
+    <li><a href="user.html">User</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="settings.html">Settings</a></li>
+    <li><a href="signup.html">Sign Up</a></li>
+  </ul>
+  <h2 align = "center">Settings
+  </h2>
   <a href="index.html">← Back to Dashboard</a>
   <p>Update your profile, preferences, and more.</p>
+  <script>if (localStorage.getItem('darkMode') === 'enabled') {
+      document.body.classList.add('dark-mode');
+      darkModeToggle.checked = true;
+    }</script>
 </body>
 </html>

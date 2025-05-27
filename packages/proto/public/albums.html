@@ -10,100 +10,103 @@
   <link href="https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- <h1 align="center">Welcome to TrackBoxd
+    <svg class="icon">
+      <use href="/icons/icons.svg#album-cover" />
+    </svg>
+  </h1> -->
+  <script type="module">
+  import { define } from "@calpoly/mustang";
+  import { TrackboxdHeader } from "./src/header.ts";
+
+  define({
+    "trackboxd-header": TrackboxdHeader
+  });
+</script>
+<trackboxd-header></trackboxd-header>
+
   <ul class="navbar">
     <li><a href="index.html">TrackBoxd</a></li>
     <li><a href="user.html">User</a></li>
-    <li><a href="albums.html">Albums</a></li>
     <li><a href="community.html">Community</a></li>
     <li><a href="settings.html">Settings</a></li>
     <li><a href="signup.html">Sign Up</a></li>
   </ul>
 
-  <h1 id="album-title"></h1>
-  <img id="album-cover" src="" alt="Album Cover" width="300" height="300">
+  <!-- <h1 alt="albumTitle"></h1>  -->
+  <div class="album-container">
+  <h1 id="albumTitle"></h1>
+  <img id="albumCover" src="" alt="albumCover" width="300" height="300">
+  </div>
+  <div class="album-info">
+  <p><strong>Album:</strong> <span id="albumTitle"></span></p>
+  <p><strong>Artist:</strong> <span id="artistName"></span></p>
+  <p><strong>Total Tracks:</strong> <span id="trackCount"></span></p>
+  <p><strong>Release Date:</strong> <span id="releaseDate"></span></p>
+  </div>
 
-  <h2>Reviews</h2>
-  <ul id="review-list"></ul>
-
-  <h3>Add a Review</h3>
-  <form id="review-form">
-    <label for="review-text">Your Review:</label><br>
-    <textarea id="review-text" rows="4" cols="50"></textarea><br>
-    <label for="rating">Rating (1-5):</label>
-    <input type="number" id="rating" min="1" max="5"><br>
-    <button type="submit">Submit</button>
-  </form>
-
-  <!-- Import custom element -->
-  <script type="module">
-    import { define } from "@calpoly/mustang";
-    import { TrackboxdReviewElement } from "/src/trackboxd-review.js";
-
-    define({
-      "trackboxd-review": TrackboxdReviewElement
-    });
-
-    // Existing JS for album page
+  <script>
+    // Get album info from URL
     const params = new URLSearchParams(window.location.search);
-    const album = params.get('album');
+    const albumId = params.get('id');
+    const albumTitle = params.get('title');
+    const albumCover = params.get('cover');
+    const artistName = params.get('artist');
+    const trackCount = params.get('tracks');
+    const releaseDate = params.get('release');
 
-    document.getElementById('album-title').textContent = album;
-    document.getElementById('album-cover').src = `album covers/${album}.jpg`;
+    // Display album info
+    //document.getElementById('albumTitle').textContent = albumTitle;
+    document.getElementById('albumCover').src = albumCover;
+    document.getElementById('albumCover').alt = albumTitle;
+    document.getElementById('artistName').textContent = artistName;
+    document.getElementById('trackCount').textContent = trackCount;
+    document.getElementById('releaseDate').textContent = releaseDate;
+    // Review handling (using localStorage for demo)
+    const reviewsDiv = document.getElementById('reviews');
+    const reviewsKey = `reviews_${albumId}`;
+    const reviews = JSON.parse(localStorage.getItem(reviewsKey)) || [];
 
-    const form = document.getElementById('review-form');
-    const reviewList = document.getElementById('review-list');
-
-    let storedReviews = JSON.parse(localStorage.getItem(`reviews-${album}`));
-
-    if (!storedReviews) {
-      if (album === "Sour") {
-        storedReviews = [
-          { text: "This album is an absolute masterpiece! Every track is a hit.", rating: "5" },
-          { text: "I love the beats, but a few tracks felt repetitive.", rating: "4" }
-        ];
-        localStorage.setItem(`reviews-${album}`, JSON.stringify(storedReviews));
-      } else {
-        storedReviews = [];
-      }
+    function renderReviews() {
+      reviewsDiv.innerHTML = reviews.length
+        ? reviews.map(r => `
+            <div class="review">
+              <strong>${r.name}</strong>: ${r.comment}
+            </div>
+          `).join('')
+        : "<p>No reviews yet. Be the first to add one!</p>";
     }
 
-    storedReviews.forEach(review => {
-      const reviewEl = document.createElement('trackboxd-review');
-      reviewEl.setAttribute('rating', review.rating);
+    renderReviews();
 
-      const textSpan = document.createElement('span');
-      textSpan.setAttribute('slot', 'review-text');
-      textSpan.textContent = review.text;
-
-      reviewEl.appendChild(textSpan);
-      reviewList.appendChild(reviewEl);
-    });
-
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-      const text = document.getElementById('review-text').value.trim();
-      const rating = document.getElementById('rating').value.trim();
-
-      if (!text || !rating) {
-        alert("Please enter both review and rating!");
-        return;
-      }
-
-      const newReview = { text, rating };
-      storedReviews.push(newReview);
-      localStorage.setItem(`reviews-${album}`, JSON.stringify(storedReviews));
-
-      const reviewEl = document.createElement('trackboxd-review');
-      reviewEl.setAttribute('rating', rating);
-
-      const textSpan = document.createElement('span');
-      textSpan.setAttribute('slot', 'review-text');
-      textSpan.textContent = text;
-
-      reviewEl.appendChild(textSpan);
-      reviewList.appendChild(reviewEl);
-
+    // Handle form submission
+    const form = document.getElementById('reviewForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('username').value;
+      const comment = document.getElementById('comment').value;
+      reviews.push({ name, comment });
+      localStorage.setItem(reviewsKey, JSON.stringify(reviews));
       form.reset();
+      renderReviews();
+    });
+  </script>
+  <script>
+    const darkModeToggle = document.querySelector('input[type="checkbox"]');
+
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      document.body.classList.add('dark-mode');
+      darkModeToggle.checked = true;
+    }
+
+    darkModeToggle.addEventListener('change', function () {
+      if (this.checked) {
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('darkMode', 'disabled');
+      }
     });
   </script>
 </body>
